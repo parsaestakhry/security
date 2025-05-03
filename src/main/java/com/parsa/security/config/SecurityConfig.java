@@ -6,10 +6,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -29,13 +25,14 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
+    // this is not the way to approach if we want to use a database based security
 
+     /* @Bean
     public UserDetailsService userDetailsService() {
 
         UserDetails user1 = User.withDefaultPasswordEncoder().username("Venom").password("password").build();
         UserDetails user2 = User.withDefaultPasswordEncoder().username("Kaz").password("password").build();
 
-        return new InMemoryUserDetailsManager(user1, user2);
-    }
+        return new InMemoryUserDetailsManager(user1, user2); 
+    } */ 
 }
