@@ -7,22 +7,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserPrincipal implements UserDetails {
 
+    private Users user;
+
+    public UserPrincipal(Users user) {
+        this.user = user;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
     }
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return user.getUsername();
     }
 
 }
