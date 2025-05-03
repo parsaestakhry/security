@@ -17,6 +17,8 @@ public class SecurityConfig {
         http.csrf(customizer -> customizer.disable());
         http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
         http.formLogin(Customizer.withDefaults());
+        // enable login from outside the spring login form
+        http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
 }
