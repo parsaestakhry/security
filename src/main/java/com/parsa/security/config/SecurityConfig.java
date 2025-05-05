@@ -14,6 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.parsa.security.filter.JwtFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,14 +25,18 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private JwtFilter jwtFilter;
+
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        // don't ask for credentials from these paths 
-                        .requestMatchers("register",
-                                "login")
+                        // don't ask for credentials from these paths
+                        .requestMatchers("register", "login")
                         .permitAll()
                         .anyRequest().authenticated())
                 // http.formLogin(Customizer.withDefaults());
@@ -37,6 +44,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults()).
                 // stateless http
                 sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
