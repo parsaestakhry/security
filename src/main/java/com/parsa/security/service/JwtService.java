@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
@@ -48,6 +49,16 @@ public class JwtService {
     private Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKEY);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String extractUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'extractUsername'");
+    }
+
+    public boolean validateToken(String token, UserDetails details) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validateToken'");
     }
 
 }
